@@ -6,17 +6,23 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion build_versions.compile_sdk
     buildToolsVersion "30.0.0"
 
     defaultConfig {
         applicationId "com.song.knockknockknock"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/gradle/incremental.annotation.processors'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
     }
 
     buildTypes {
@@ -41,41 +47,32 @@ android {
 }
 
 dependencies {
+    implementation deps.kotlin.stdlib
+    implementation deps.ktx
+    implementation deps.appcompat
+    implementation deps.material
+    implementation deps.constraintlayout
+    implementation deps.recyclerview
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$ktx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+    implementation deps.coroutine.android
+    implementation deps.coroutine.test
+    implementation deps.flow
 
-    // Async
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    implementation "com.github.akarnokd:kotlin-flow-extensions:$flow_extensions_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    implementation deps.lifecycle
 
-    // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation deps.navigation.fragment
+    implementation deps.navigation.ui
 
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    implementation deps.hilt.android
+    implementation deps.hilt.compiler
+    implementation deps.hilt.instrumental_test
+    implementation deps.hilt.instrumental_test_compiler
+    implementation deps.hilt.test
+    implementation deps.hilt.test_compiler
 
-    // DI
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    // For instrumentation tests
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
-    // For local unit tests
-    testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    kaptTest "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation deps.timber
 
-    // Debug
-    implementation "com.jakewharton.timber:timber:$timber_version"
-
-    //test
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$test_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
+    implementation deps.junit
+    implementation deps.test_junit
+    implementation deps.test_espresso
 }
