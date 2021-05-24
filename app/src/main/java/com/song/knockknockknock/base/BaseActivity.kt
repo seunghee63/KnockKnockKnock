@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
-
-    abstract val layoutResId: Int
+abstract class BaseActivity<VB : ViewDataBinding>(private val layoutResId: Int) : AppCompatActivity() {
     lateinit var binding: VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
